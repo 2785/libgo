@@ -1,6 +1,6 @@
 module github.com/2785/libgo
 
-go 1.22.3
+go 1.22
 
 require (
 	github.com/gobeam/stringy v0.0.7
