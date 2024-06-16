@@ -52,6 +52,8 @@ func RegisterArgs[T any](v *T, flagSet *pflag.FlagSet) error {
 			flagSet.IntVarP(reflect.ValueOf(v).Elem().FieldByName(fieldName).Addr().Interface().(*int), name, lo.FromPtr(parsedTag.Short), int(reflect.ValueOf(field).Int()), lo.FromPtr(parsedTag.Description))
 		case reflect.TypeOf(field) == reflect.TypeOf([]string{}):
 			flagSet.StringSliceVarP(reflect.ValueOf(v).Elem().FieldByName(fieldName).Addr().Interface().(*[]string), name, lo.FromPtr(parsedTag.Short), reflect.ValueOf(field).Interface().([]string), lo.FromPtr(parsedTag.Description))
+		case reflect.TypeOf(field) == reflect.TypeOf([]int{}):
+			flagSet.IntSliceVarP(reflect.ValueOf(v).Elem().FieldByName(fieldName).Addr().Interface().(*[]int), name, lo.FromPtr(parsedTag.Short), reflect.ValueOf(field).Interface().([]int), lo.FromPtr(parsedTag.Description))
 		default:
 			return errors.Errorf("type %s not supported by this yet", reflect.TypeOf(field))
 		}
